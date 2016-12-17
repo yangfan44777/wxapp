@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/bin/www"
+    "start": "nodemon ./build/bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -24,6 +24,7 @@
     "babel-preset-stage-3": "^6.17.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
   }
 }
