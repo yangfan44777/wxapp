@@ -29,8 +29,7 @@ let CommondityGroupType = new GraphQLObjectType({
                 size: {
                     type: GraphQLString
                 }
-            },
-            resolve: (_, {size}) => ''
+            }
         },
         type: {
             type: new GraphQLList(GraphQLString)
@@ -41,8 +40,7 @@ let CommondityGroupType = new GraphQLObjectType({
                 size: {
                     type: GraphQLString
                 }
-            },
-            resolve: (_, {size}) => []
+            }
         },
         comments: {
             type: new GraphQLList(CommentType)/*,

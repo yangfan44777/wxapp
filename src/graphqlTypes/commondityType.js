@@ -25,8 +25,7 @@ let CommondityType = new GraphQLObjectType({
                 size: {
                     type: GraphQLString
                 }
-            },
-            resolve: (_, {size}) => size + ' size pic'
+            }
         },
         detail_pics: {
             type: new GraphQLList(GraphQLString),
@@ -34,8 +33,7 @@ let CommondityType = new GraphQLObjectType({
                 size: {
                     type: GraphQLString
                 }
-            },
-            resolve: (_, {size}) => [size + ' size pic1', size + ' size pic2']
+            }
         },
         state: {
             type: GraphQLInt
