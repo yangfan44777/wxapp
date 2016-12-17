@@ -7,6 +7,9 @@ gulp.task('default', () => {
         presets: ['stage-3']
     }))
     .pipe(gulp.dest('build'));
+
+    gulp.src('src/**/*.jade')
+    .pipe(gulp.dest('build'));
 });
 
 /*  */
