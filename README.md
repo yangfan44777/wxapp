@@ -12,10 +12,10 @@
         defaultPic: ''
     }
     
-## 2.编译
+## 3.编译
 `gulp`
 
-## 运行
+## 4.运行
 
     npm run start
     
