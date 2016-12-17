@@ -4,5 +4,6 @@ export default {
 		port: '27017',
 		name: 'wxapp'
 	},
-	defaultPic: ''
+	defaultPic: '',
+	rootDir: __dirname
 }
