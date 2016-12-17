@@ -27,7 +27,7 @@ http://127.0.0.1:3000
                                             //数据部分不填使用默认值
     node DBDataCreator.js create commondity '{"title":"哈啤 200ml","price":10.00}'
 
-## 数据库创建一个商品组(包含一个或多个商品类型)
+## 数据库创建一个商品组(包含一个或多个商品型号)
     
     cd build
                                                  //数据部分不填使用默认值
