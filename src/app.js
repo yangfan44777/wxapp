@@ -14,8 +14,6 @@ import commonditySchema from './graphqlSchemas/commonditySchema.js';
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://'+config.db.host+'/' + config.db.name);
 
-var routes = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -35,7 +33,6 @@ app.use('/commondity', graphqlHTTP({
   pretty: true
 }));
 
-app.use('/test', routes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
