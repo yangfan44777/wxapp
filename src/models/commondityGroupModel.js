@@ -18,7 +18,7 @@ let commondityGroupSchema = new Schema({
 	pic: {type: String, default: config.defaultPic},
 
 	//详情图数组
-	detail_pics: {type: [String], default: ['pic1.png','pic2.png']},
+	detail_pics: [String],
 
     //商品类型
     type: [String],

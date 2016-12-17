@@ -102,8 +102,8 @@ let create_commondity = new Create(
 	{
 		title: '商品型号名',
 		price: 10.00,
-		pic: 'http://static.wxapp.com/pic',
-		detail_pics: ['pic1.png','pic2.png'],
+		pic: '',
+		detail_pics: [],
 		state: 1,
 		count_rest: parseInt(Math.random() * 1000, 10),
 		count_sold: parseInt(Math.random() * 1000, 10)
@@ -117,10 +117,10 @@ let create_commondityGroup = new Create(
 	{
 		name: '商品型号名',
 		price: 10.00,
-		pic: 'http://static.wxapp.com/pic',
-		detail_pics: ['pic1.png','pic2.png'],
-		type: ['饮品', '酒'],
-		comments_id: ['123','234'],
+		pic: '',
+		detail_pics: [],
+		type: [],
+		comments_id: [],
 		sku: []
 	}
 );

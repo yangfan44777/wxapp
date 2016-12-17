@@ -18,7 +18,7 @@ let commonditySchema = new Schema({
 	pic: {type: String, default: config.defaultPic},
 
 	//详情图数组
-	detail_pics: {type: [String], default: ['pic1.png','pic2.png']},
+	detail_pics: [String],
 
 	//商品状态, 0: 预售, 1: 在售, 2: 已售罄, 3: 已下架
 	state: {type: Number, default: 1},

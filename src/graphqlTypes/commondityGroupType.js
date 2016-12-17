@@ -30,7 +30,7 @@ let CommondityGroupType = new GraphQLObjectType({
                     type: GraphQLString
                 }
             },
-            resolve: (_, {size}) => size + ' size pic'
+            resolve: (_, {size}) => ''
         },
         type: {
             type: new GraphQLList(GraphQLString)
@@ -42,7 +42,7 @@ let CommondityGroupType = new GraphQLObjectType({
                     type: GraphQLString
                 }
             },
-            resolve: (_, {size}) => [size + ' size pic1', size + ' size pic2']
+            resolve: (_, {size}) => []
         },
         comments: {
             type: new GraphQLList(CommentType)/*,
