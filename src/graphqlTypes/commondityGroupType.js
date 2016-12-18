@@ -9,7 +9,8 @@ import {
 
 import CommentType from './commentType.js';
 import CommondityType from './commondityType.js';
-import commondityLoader from '../dataLoaders/commondityLoader.js'
+import commondityLoader from '../dataLoaders/commondityLoader.js';
+import underscore from 'underscore';
 
 let CommondityGroupType = new GraphQLObjectType({
     name: 'CommondityGroupType',
@@ -51,7 +52,15 @@ let CommondityGroupType = new GraphQLObjectType({
         /*  */
         sku: {
             type: new GraphQLList(CommondityType),
-            resolve: (_) => _.sku.map((id) => commondityLoader.load(id))
+            args: {
+                ids: {
+                    type: new GraphQLList(GraphQLString)
+                }
+            },
+            resolve: (_, {ids}) => {
+                ids = ids ? underscore.intersection(ids, _.sku) : _.sku;
+                return ids.map((id) => commondityLoader.load(id));
+            }
         }
     }
 });
