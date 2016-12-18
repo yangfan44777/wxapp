@@ -115,7 +115,7 @@ let create_commondityGroup = new Create(
 	'commondityGroup',
 	commondityGroupModel.create,
 	{
-		name: '商品型号名',
+		name: '商品组名',
 		price: 10.00,
 		pic: '',
 		detail_pics: [],
