@@ -31,14 +31,14 @@ let commondityGroupSchema = new Schema({
 });
 
 
-var _CommondityGroupModel = mongoose.model('CommondityGroup', commondityGroupSchema);
+let _CommondityGroupModel = mongoose.model('CommondityGroup', commondityGroupSchema);
 
 let create = function (commondityGroupData) {
-	var commondityGroup = new _CommondityGroupModel(commondityGroupData);
+	let commondityGroup = new _CommondityGroupModel(commondityGroupData);
 	return commondityGroup.save();
 };
 
-var createMongooseExecFn = function (nativeFn) {
+let createMongooseExecFn = function (nativeFn) {
 	return function () {
 		(nativeFn.apply(_CommondityGroupModel, arguments)).exec();
 	}

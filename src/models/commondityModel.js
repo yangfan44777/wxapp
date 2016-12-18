@@ -32,14 +32,14 @@ let commonditySchema = new Schema({
 });
 
 
-var _CommondityModel = mongoose.model('Commondity', commonditySchema);
+let _CommondityModel = mongoose.model('Commondity', commonditySchema);
 
 let create = function (commondityData) {
-	var commondity = new _CommondityModel(commondityData);
+	let commondity = new _CommondityModel(commondityData);
 	return commondity.save();
 };
 
-var createMongooseExecFn = function (nativeFn) {
+let createMongooseExecFn = function (nativeFn) {
 	return function () {
 		(nativeFn.apply(_CommondityModel, arguments)).exec();
 	}

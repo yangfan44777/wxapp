@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 import config from './config.js';
 import commondityModel from './models/commondityModel.js';
 import commondityGroupModel from './models/commondityGroupModel.js';
