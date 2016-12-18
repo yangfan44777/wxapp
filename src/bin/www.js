@@ -30,7 +30,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer(credentials,app);
+var server = http.createServer(app);
+//var server = https.createServer(credentials,app);
 
 /**
  * Listen on provided port, on all network interfaces.
