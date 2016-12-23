@@ -1,5 +1,7 @@
 import DataLoader from 'dataloader';
 import cache from '../cacheModule/main.js';
+import underscore from 'underscore';
+import clone from 'clone';
 
 function createDataLoader(mongooseExecPromise) {
 	/* 缓存策略： */
@@ -19,7 +21,7 @@ function createDataLoader(mongooseExecPromise) {
 	let getValsFromCache = keys => cache.get(keys).then((res)=>{
 			let needLoadFromDBList = [];
 			let cachedList = [];
-			console.log('从cache中拿到:',res);
+			//console.log('从cache中拿到:' , keys);
 			//找出所有为null的value, 打到DB查询, 查询后加入缓存
 			res.forEach((val, idx) => {
 				if (val === null) {
@@ -64,6 +66,7 @@ function createDataLoader(mongooseExecPromise) {
 		res[1] = res[1].map(val => JSON.parse(val));
 
 		//合并
+		console.log([...res[0], ...res[1]]);
 		return [...res[0], ...res[1]];
 	};
 
@@ -76,21 +79,18 @@ function createDataLoader(mongooseExecPromise) {
 	 * return {Array<Object>} 排序后的数组
 	 */
 	let ensureValsOrder = (keys) => (vals) => {
-		
-		var length = keys.length;
-		let _vals = [];
-		while (length--) {
-			_vals[length] = null;
-		}
-		
-		vals.forEach((val, idx) => {
-			let _idx = keys.indexOf('' + val._id);
-			if (_idx > -1) {
-				_vals[_idx] = val;
-			}
-		});
-		return _vals;
 
+		let length = keys.length;
+		let _vals = [];
+		let fIdx;
+		let ids = vals.map(item => item._id.toString());
+
+		while (length--) {
+			fIdx = underscore.findIndex(ids, id => id === keys[length]);
+			_vals[length] = fIdx > -1 ? clone(vals[fIdx]) : null;
+		}
+
+		return _vals;
 	};
 
 	let batch = keys => getValsFromCache(keys)
