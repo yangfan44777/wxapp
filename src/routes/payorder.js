@@ -42,7 +42,7 @@ router.post('/', function(req, res, next) {
 	      	let pa = {
 			  	body: '支付测试', // 商品或支付单简要描述
 			  	out_trade_no: 'orderabc', // 商户系统内部的订单号,32个字符内、可包含字母
-			  	total_fee: 100, //订单总金额，单位为分
+			  	total_fee: 1, //订单总金额，单位为分
 			  	spbill_create_ip: remoteAddress, //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP
 			  	notify_url: encodeURIComponent('https://petadore.cn/paycb'),
 			  	trade_type: 'JSAPI',
