@@ -35,8 +35,6 @@ router.post('/', function(req, res, next) {
 	request(`https://api.weixin.qq.com/sns/jscode2session?appid=wxc2c69d984b94586a&secret=2a7785b4db349fd075fec7961e0e8a51&js_code=${code}&grant_type=authorization_code`, function (error, response, body) {
       	if (!error && response.statusCode == 200) {
 	      	let openid = JSON.parse(body).openid;
-	      	console.log(body);
-	      	console.log(openid);
 
 	      	let pa = {
 			  	body: '支付测试', // 商品或支付单简要描述
@@ -50,14 +48,9 @@ router.post('/', function(req, res, next) {
 			  	openid: openid
 			};
 
-			console.log('requestParams:', pa);
-
 	      	wxPayment.getBrandWCPayRequestParams(pa, (err, reqparam) => {
-				console.log('error:',err);
-				console.log('result:',reqparam);
 			  	res.json(reqparam);
 			});
-	      	
       	} else {
       		res.json(error);
       	}
