@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 			  	total_fee: 100, //订单总金额，单位为分
 			  	spbill_create_ip: remoteAddress, //APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP
 			  	notify_url: 'https://petadore.cn/paycb',
-			  	trade_type: 'APP',
+			  	trade_type: 'JSAPI',
 			  	product_id: '1234567890',
 			  	openid: openid
 			}, function(err, result){
