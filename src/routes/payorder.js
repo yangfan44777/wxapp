@@ -48,7 +48,8 @@ router.post('/', function(req, res, next) {
 			  	product_id: '1234567890',
 			  	openid: openid
 			}, function(err, result){
-				console.log(err);
+				console.log('error:',err);
+				console.log('result:',result);
 			  	res.json(result);
 			});
       	} else {
