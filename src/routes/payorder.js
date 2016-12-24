@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 	request(`https://api.weixin.qq.com/sns/jscode2session?appid=wxc2c69d984b94586a&secret=2a7785b4db349fd075fec7961e0e8a51&js_code=${code}&grant_type=authorization_code`, function (error, response, body) {
       	if (!error && response.statusCode == 200) {
 	      	let openid = body.openid;
-
+	      	console.log(body);
 	      	/* 创建统一支付订单 */
 			wxPayment.createUnifiedOrder({
 			  	body: '支付测试', // 商品或支付单简要描述
