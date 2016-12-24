@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
 	      	console.log(body);
 	      	console.log(openid);
 
-	      	wxPayment.getBrandWCPayRequestParams({
+	      	let pa = {
 			  	body: '支付测试', // 商品或支付单简要描述
 			  	out_trade_no: 'orderabc', // 商户系统内部的订单号,32个字符内、可包含字母
 			  	total_fee: 100, //订单总金额，单位为分
@@ -48,7 +48,11 @@ router.post('/', function(req, res, next) {
 			  	trade_type: 'JSAPI',
 			  	product_id: '1234567890',
 			  	openid: openid
-			}, (err, reqparam) => {
+			};
+
+			console.log('requestParams:', pa);
+
+	      	wxPayment.getBrandWCPayRequestParams(pa, (err, reqparam) => {
 				console.log('error:',err);
 				console.log('result:',reqparam);
 			  	res.json(reqparam);
