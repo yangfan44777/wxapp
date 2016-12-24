@@ -12,7 +12,8 @@ import graphqlHTTP from 'express-graphql';
 import commonditySchema from './graphqlSchemas/commonditySchema.js';
 import mongoose from 'mongoose';
 
-import code2session from './routes/code2session.js';
+import payorder from './routes/payorder.js';
+import paycb from './routes/paycb.js';
 
 /* 数据库连接 */
 mongoose.connect('mongodb://'+config.db.host+'/' + config.db.name);
@@ -36,8 +37,8 @@ app.use('/commondity', graphqlHTTP({
   pretty: true
 }));
 
-app.use('/code2session', code2session);
-
+app.use('/payorder', payorder);
+app.use('/paycb', paycb);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
