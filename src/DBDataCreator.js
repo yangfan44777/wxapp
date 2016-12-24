@@ -52,14 +52,14 @@ let Operation = function (type) {
 	};
 	con.prototype.exec = async function (data) {
 		data = extend(this.defaultData, data || {});
-		if (type === 'create') {
+		/*if (type === 'create') {
 			let timeStamp = '_' + (+new Date());
 			for (let i in data) {
 				if (typeof data[i] === 'string') {
 					data[i] += timeStamp;
 				}
 			}
-		}
+		}*/
 		let msg = '\n' + this.type + ' ' + this.name + ' ';
 
 		try {
