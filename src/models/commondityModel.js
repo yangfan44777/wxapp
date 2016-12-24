@@ -41,7 +41,7 @@ let create = function (commondityData) {
 
 let createMongooseExecFn = function (nativeFn) {
 	return function () {
-		(nativeFn.apply(_CommondityModel, arguments)).exec();
+		return (nativeFn.apply(_CommondityModel, arguments)).exec();
 	}
 }
 

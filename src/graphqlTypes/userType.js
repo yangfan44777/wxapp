@@ -1,40 +1,32 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
+    GraphQLObjectType,
+    GraphQLString,
+    GraphQLList
 } from 'graphql';
 
 let UserType = new GraphQLObjectType({
     name: 'UserType',
     fields: {
-        id: {
+        user_id: {
             type: GraphQLString
         },
-        head_pic: {
-            type: GraphQLString,
-            args: {
-                size: {
-                    type: GraphQLString
-                }
-            },
-            resolve: function (user, args) {
-                var size = args['size'];
-                return 'pic_url:xxx,size:'+size;
-            }
-        },
-        nickname: {
-            type: GraphQLString
-        },
-        realname: {
+        name: {
             type: GraphQLString
         },
         phone: {
             type: GraphQLString
         },
         location: {
-            type: GraphQLString
+            type: new GraphQLList(GraphQLString)
         },
         address: {
-            type: GraphQLString
+            type: new GraphQLList(GraphQLString)
+        },
+        postcode: {
+            type: new GraphQLList(GraphQLString)
+        },
+        orders: {
+            type: new GraphQLList(GraphQLString)
         }
     }
 });

@@ -72,4 +72,8 @@ let set = function (keys, vals) {
 	.execAsync();
 };
 
-export default {get, set};
+let del = function (key) {
+	client.del(key);
+};
+
+export default {get, set, del};

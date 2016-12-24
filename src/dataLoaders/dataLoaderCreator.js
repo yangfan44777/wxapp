@@ -3,7 +3,8 @@ import cache from '../cacheModule/main.js';
 import underscore from 'underscore';
 import clone from 'clone';
 
-function createDataLoader(mongooseExecPromise) {
+/* fieldName要保证唯一 */
+function createDataLoader(mongooseExecPromise, fieldName) {
 	/* 缓存策略： */
 	/* 1. 尝试从cache中读取所有key对应的value
 	   2. 有缓存数据就push到缓存数组，没有就push到待查询DB数组 
@@ -44,7 +45,6 @@ function createDataLoader(mongooseExecPromise) {
 	let getAllVals = res => res.needLoadFromDBList.length > 0 ? 
 				Promise.all([
 					mongooseExecPromise(res.needLoadFromDBList),
-					//commondityModel._model.find().where('_id').in(res.needLoadFromDBList).lean().exec(),
 					Promise.resolve(res.cachedList)
 				]) : [[], res.cachedList];
 
@@ -57,8 +57,8 @@ function createDataLoader(mongooseExecPromise) {
 		//res[1]: 从cache中读取的数据
 		//res[0]缓存到cache中
 		cache.set(
-			//使用ObjectId作为key
-			res[0].map(item=>item._id.toString()),
+			//使用fieldName作为key
+			res[0].map(item=>item[fieldName].toString()),
 			res[0].map(item=>JSON.stringify(item))
 		);
 		
@@ -83,7 +83,7 @@ function createDataLoader(mongooseExecPromise) {
 		let length = keys.length;
 		let _vals = [];
 		let fIdx;
-		let ids = vals.map(item => item._id.toString());
+		let ids = vals.map(item => item[fieldName].toString());
 
 		while (length--) {
 			fIdx = underscore.findIndex(ids, id => id === keys[length]);
@@ -98,7 +98,13 @@ function createDataLoader(mongooseExecPromise) {
 		.then(mergeVals)
 		.then(ensureValsOrder(keys));
 
-	return new DataLoader(batch, {cache: false});
+	let loader = new DataLoader(batch, {cache: false});
+
+	/* 后期可以考虑使用RabbitMQ来插入、更新、清除缓存 */
+	loader.clearCache = function (key) {
+		cache.del(key);
+	};
+	return loader;
 
 }
 

@@ -10,10 +10,12 @@ import 'regenerator-runtime/runtime';
 import config from './config.js';
 import graphqlHTTP from 'express-graphql';
 import commonditySchema from './graphqlSchemas/commonditySchema.js';
+import userSchema from './graphqlSchemas/userSchema.js';
 import mongoose from 'mongoose';
 
 import payorder from './routes/payorder.js';
 import paycb from './routes/paycb.js';
+import phonecode from './routes/phonecode.js';
 
 /* 数据库连接 */
 mongoose.connect('mongodb://'+config.db.host+'/' + config.db.name);
@@ -37,8 +39,14 @@ app.use('/commondity', graphqlHTTP({
   pretty: true
 }));
 
+app.use('/user', graphqlHTTP({
+  schema: userSchema,
+  pretty: true
+}));
+
 app.use('/payorder', payorder);
 app.use('/paycb', paycb);
+app.use('/phonecode', phonecode);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
