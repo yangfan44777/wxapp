@@ -49,7 +49,7 @@ let get = function (keys) {
 	return client.multi([['mget', ...keys]])
 	.execAsync()
 	.catch((err) => {
-		return Promise.resolve(keys.map(()=>null));
+		return Promise.resolve([keys.map(()=>null)]);
 	})
 	.then(res => {
 		return res[0];
