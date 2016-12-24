@@ -37,6 +37,7 @@ router.post('/', function(req, res, next) {
       	if (!error && response.statusCode == 200) {
 	      	let openid = body.openid;
 	      	console.log(body);
+	      	console.log(body.openid);
 	      	/* 创建统一支付订单 */
 			wxPayment.createUnifiedOrder({
 			  	body: '支付测试', // 商品或支付单简要描述
