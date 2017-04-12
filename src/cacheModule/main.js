@@ -1,12 +1,6 @@
 import redis from 'redis';
 import bluebird from 'bluebird';
-
-/* 缓存服务器配置 */
-let config = {
-	RDS_HOST: '127.0.0.1',
-	RDS_PORT: '6379',
-	RDS_OPTS: {}
-};
+import config from '../config.js';
 
 const READY = 'ready', FAIL = 'fail', CONNECT = 'connect';
 
@@ -18,7 +12,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 let status = null;
 
 //client实例
-let client = redis.createClient(config.RDS_PORT, config.RDS_HOST, config.RDS_OPTS);
+let client = redis.createClient(config.cacheDB.RDS_PORT, config.cacheDB.RDS_HOST, config.cacheDB.RDS_OPTS);
 
 client.on('ready', (res) => {
 	status = READY;

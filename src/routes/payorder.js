@@ -32,6 +32,7 @@ router.post('/', function(req, res, next) {
 
 	let remoteAddress = getClientIp(req);
 
+	/* 获取openid封装成工具 */
 	request(`https://api.weixin.qq.com/sns/jscode2session?appid=wxc2c69d984b94586a&secret=2a7785b4db349fd075fec7961e0e8a51&js_code=${code}&grant_type=authorization_code`, function (error, response, body) {
       	if (!error && response.statusCode == 200) {
 	      	let openid = JSON.parse(body).openid;

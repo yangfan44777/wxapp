@@ -59,16 +59,27 @@ let UserMutationRoot = new GraphQLObjectType({
                 },
                 registercode: {
                     type: GraphQLString 
+                },
+                authcode: {
+                    type: GraphQLString
                 }
             },
-            resolve: (_, args) => {
+            resolve: async (_, args) => {
                 let userData = {};
+
                 for (let key in args) {
                     userData[key] = args[key];
                 }
 
-                /* 注册逻辑 */
-                if (userData.registercode) {
+                let user = await UserModel.findOne({user_id: args.user_id});
+                if (user) {
+                    /* 修改逻辑 */
+                    return UserModel.findOneAndUpdate({user_id: userData.user_id}, userData)
+                    .then((data) => {
+                        userLoader.clearCache(userData.user_id);
+                        return data;
+                    });
+                } else if (userData.registercode) {
                     let time = +new Date();
                     return PhoneCodeModel.findOneAndRemove({
                         openid: userData.user_id,
@@ -81,14 +92,9 @@ let UserMutationRoot = new GraphQLObjectType({
                         }
                         return new Error("REG_FAIL");
                     });
+                } else {
+                    throw new Error("FAIL");
                 }
-
-                /* 修改逻辑 */
-                return UserModel.findOneAndUpdate({user_id: userData.user_id}, userData)
-                .then((data) => {
-                    userLoader.clearCache(userData.user_id);
-                    return data;
-                });
             }
         }
     }

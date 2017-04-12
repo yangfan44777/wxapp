@@ -16,6 +16,8 @@ import mongoose from 'mongoose';
 import payorder from './routes/payorder.js';
 import paycb from './routes/paycb.js';
 import phonecode from './routes/phonecode.js';
+import authentication from './routes/authentication.js';
+import login from './routes/login.js';
 
 /* 数据库连接 */
 mongoose.connect('mongodb://'+config.db.host+'/' + config.db.name);
@@ -32,7 +34,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/login', login);
+
+/* 登录验证 */
+app.use('/', authentication);
 
 app.use('/commondity', graphqlHTTP({
   schema: commonditySchema,

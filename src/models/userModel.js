@@ -50,7 +50,9 @@ let UserModel = {
 	create: create,
 	findById: createMongooseExecFn(_UserModel.findById),
 	find: createMongooseExecFn(_UserModel.find),
-	findOneAndUpdate: createMongooseExecFn(_UserModel.findOneAndUpdate)
+	findOneAndUpdate: createMongooseExecFn(_UserModel.findOneAndUpdate),
+	findOne: createMongooseExecFn(_UserModel.findOne),
+	update: createMongooseExecFn(_UserModel.update)
 };
 
 export default UserModel;
